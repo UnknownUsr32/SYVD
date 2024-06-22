@@ -9,7 +9,7 @@ Simple Youtube Video Downloader(SYVD) is a Youtube video downloading tool
 
 # Usage:
 ```
-git clone https://github.com/rifatsobri/SYVM/
+git clone https://github.com/rifatsobri/SYVD/
 ```
 ```
 pip install -r requirement.txt
