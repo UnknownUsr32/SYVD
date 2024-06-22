@@ -1,5 +1,5 @@
 # Simple Youtube Video Downloader
-Simple Youtube Video Downloader(SYVD) is a Youtube video downloading tool 
+Simple Youtube Video Downloader(SYVD) is a Youtube video downloading tool written in Python.
 
 
 
