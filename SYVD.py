@@ -45,7 +45,7 @@ def Download(link, output_path, filename):
             print("Audio file downloaded!")
         else:
             q2 = '''Choose download mode:
-    1.Adaptive Mode(Recommended,REQUIRES FFMPEG!)
+    1.Adaptive Mode(Recommended)
     2.Progressive Mode(Terrible quality)'''
             print(q2)
             selection = input("===>").strip().lower()
