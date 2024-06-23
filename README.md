@@ -15,7 +15,7 @@ git clone https://github.com/rifatsobri/SYVD/
 pip install -r requirement.txt
 ```
 ```
-python SYVD.py
+python3 SYVD.py
 ```
 
 
