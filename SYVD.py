@@ -128,85 +128,75 @@ def main():
     bold = '\033[1m'
     reset = '\033[0m'
     clear = lambda: print('\033c', end='', flush=True)
-    t1 = "       Simple Youtube Video Downloader"
-    t2 = "                By Unknown_32"
-    clear()
-    print(ascii)
-    print(f'{bold}{t1}{reset}')
-    print(f'{bold}{t2}{reset}')
+    t1 = '       Simple Youtube Video Downloader'
+    t2 = '                By Unknown_32'
+
     try:
-        link = input("Enter YouTube URL: ").strip()
-        if not link:
-            print("URL cannot be empty")
-            return
+        clear()
+        print(ascii)
+        print(f'{bold}{t1}{reset}')
+        print(f'{bold}{t2}{reset}')
+        while True:
+
+            link = input("Enter YouTube URL: ").strip()
+            if not link:
+                print("URL cannot be empty")
+            else:
+                break
         validation = YouTube(link)
         clear()
         print(ascii)
-        path = input("Enter path to which the downloaded file will be saved(Press enter to save on current directory): ").strip()
-        if not path:
-            path = os.getcwd()
-        if not os.path.isdir(path):
-            print("Path is not a directory")
-            return
-        if not os.path.exists(path):
-            create_dir = input("Path does not exist, do you want to create it?(y/n)").strip().lower()
-            if create_dir == 'y':
-                os.makedirs(path)
+        while True:
+            path = input("Enter path to which the downloaded file will be saved(Press enter to save on current directory): ").strip()
+            if not path:
+                path = os.getcwd()
+                break
+
+            if not os.path.isdir(path):
+                print("Path is not a directory")
+                continue
+
+            if not os.path.exists(path):
+                create_dir = input("Path does not exist, do you want to create it?(y/n)").strip().lower()
+                if create_dir == 'y':
+                    os.makedirs(path)
+                else:
+                    print("Exiting...")
+                    return
+
+            if not check_path_access(path):
+                time.sleep(1)
+                pass
             else:
-                print("Exiting....")
-                return
-
-        if not check_path_access(path):
-            return
-
+                break
 
         clear()
         print(ascii)
-        name = input("Enter output name(Press enter for default name): ").strip().replace(' ', '_')
-        if not name:
-            name = None
-        if not name:
-            name = validation.title.strip().replace(' ', '_')
-        print(path + name + '.mp4')
-        if os.name == 'nt':
-            if os.path.isfile(path + r'\\' + name + '.mp4'):
-                print("File already exists")
-                time.sleep(1.5)
-                clear()
-                print(ascii)
-                print('''
-1.Replace
-2.Rename
-3.Exit''')
-                Action = input('===>')
-                if Action == '1':
-                    os.remove(path + r'\\' + name + '.mp4')
-                elif Action == '2':
-                    path = input("Enter path to which the downloaded file will be saved(Press enter to save on current directory): ").strip()
-                elif Action == '3':
-                    return
-                else:
-                    print('Invalid input')
-        else:
-            if os.path.isfile(path + r'/' + name + '.mp4'):
-                print("File already exists")
-                time.sleep(1.5)
-                clear()
-                print(ascii)
-                print('''
-1.Replace
-2.Rename
-3.Exit''')
-                Action = input('===>')
-                if Action == '1':
-                    os.remove(path + r'/' + name + '.mp4')
-                elif Action == '2':
-                    path = input("Enter path to which the downloaded file will be saved(Press enter to save on current directory): ").strip()
-                elif Action == '3':
-                    return
-                else:
-                    print('Invalid input')
+        while True:
 
+            name = input("Enter output name(Press enter for default name): ").strip().replace(' ', '_').replace('.mp4',
+                                                                                                                '')
+            if not name:
+                name = validation.title.strip().replace(' ', '_')
+
+            if os.path.isfile(os.path.join(path, name + '.mp4')):
+                print("File already exists")
+                time.sleep(1.5)
+                print('''
+1.Replace
+2.Rename
+3.Exit''')
+                Action = input('===>')
+                if Action == '1':
+                    os.remove(os.path.join(path, name + '.mp4'))
+                elif Action == '2':
+                    continue
+                elif Action == '3':
+                    print("Exiting...")
+                    return
+                else:
+                    print('Invalid input')
+            break
         clear()
         print(ascii)
         Download(link, path, name)
